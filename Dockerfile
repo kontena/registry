@@ -1,4 +1,4 @@
-FROM registry:2.1
+FROM registry:2.2
 
 ADD ./run.sh /run.sh
 
