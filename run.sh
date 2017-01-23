@@ -1,6 +1,15 @@
-#!/bin/bash
+#!/bin/sh
+
+echo "~~ Kontena Registry ~~"
+echo ""
+
+case "$1" in
+    *.yaml|*.yml) set -- registry serve "$@" ;;
+    serve|garbage-collect|help|-*) set -- registry "$@" ;;
+esac
 
 if [ -n "$AUTH_PASSWORD" ]; then
+  echo "* authentication enabled"
   htpasswd -Bbn "admin" "$AUTH_PASSWORD" > /htpasswd
   export REGISTRY_AUTH="htpasswd"
   export REGISTRY_AUTH_HTPASSWD_REALM="Registry Realm"
@@ -19,4 +28,6 @@ if [ -n "$REGISTRY_HTTP_TLS_KEY" ]; then
   export REGISTRY_HTTP_TLS_KEY="/ssl/key.pem"
 fi
 
-exec registry /etc/docker/registry/config.yml
+echo ""
+
+exec "$@"
