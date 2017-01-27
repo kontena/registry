@@ -1,5 +1,4 @@
-FROM registry:2.2
+FROM registry:2.6.0
 
-ADD ./run.sh /run.sh
-
-ENTRYPOINT "/run.sh"
+ENV REGISTRY_STORAGE_DELETE_ENABLED=true
+ADD ./run.sh /entrypoint.sh
