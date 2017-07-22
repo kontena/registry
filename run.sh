@@ -28,6 +28,11 @@ if [ -n "$REGISTRY_HTTP_TLS_KEY" ]; then
   export REGISTRY_HTTP_TLS_KEY="/ssl/key.pem"
 fi
 
+if [ -n "$REGISTRY_AUTH_TOKEN_ROOTCERTBUNDLE" ]; then
+  echo -e "${REGISTRY_AUTH_TOKEN_ROOTCERTBUNDLE}" > /token_rootcertbundle
+  export REGISTRY_AUTH_TOKEN_ROOTCERTBUNDLE="/token_rootcertbundle"
+fi
+
 echo ""
 
 exec "$@"
